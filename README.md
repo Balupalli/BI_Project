@@ -2,10 +2,5 @@
 To store the scripts and documents of reporting project
 
 Aim: The aim of this project is to perform Data ingestion and Warehousing and develop Data visualizations for deriving data insights.
-Implement the warehousing using store procedures and Test the.
-<<<<<<< Updated upstream
+Implement the warehousing using store procedures.
 
-=======
-Example
-1.
->>>>>>> Stashed changes
