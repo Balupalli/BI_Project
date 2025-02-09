@@ -2,3 +2,6 @@
 .venv/
 *.csv
 .DS_Store
+# ignore cache files of pytest and cache folder which creates automatically
+__pycache__/
+*.pyc
