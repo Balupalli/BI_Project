@@ -7,7 +7,7 @@ import pandas as pd
 import mysql.connector
 
 # read data from local
-df = pd.read_csv('/Users/saiprakashreddybalupalli/PycharmProjects/BI_Project/Fraudulent_E-Commerce_Transaction_Data.csv')
+df = pd.read_csv('/Fraudulent_E-Commerce_Transaction_Data.csv')
 
 # Establish MySQL connection
 conn = mysql.connector.connect(
