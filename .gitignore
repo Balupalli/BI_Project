@@ -5,3 +5,5 @@
 # ignore cache files of pytest and cache folder which creates automatically
 __pycache__/
 *.pyc
+# ignoring the json files to push to git
+*.json
