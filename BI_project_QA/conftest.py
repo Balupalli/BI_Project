@@ -2,6 +2,23 @@ import pytest
 import mysql.connector
 import json
 import os
+from sqlalchemy import create_engine
+
+# Add a custom command line option to determine the environment to run automation tests
+#def pytest_addoption(parser):
+#   parser.addoption("--env", default="QA", help="Select environment: DEV, QA, or PROD")
+
+@pytest.fixture(scope="session")
+def test_env(pytestconfig):
+    env=pytestconfig.getoption("env")
+    db_credentials = getdb_credentials()
+    if env=='DEV':
+        return db_credentials['DB_CREDENTIALS_DEV']
+    elif env=='QA':
+        return db_credentials['DB_CREDENTIALS_QA']
+    elif env=='PROD':
+        return db_credentials['DB_CREDENTIALS_PROD']
+
 
 def getdb_credentials():
     file_name = "config.json"
@@ -15,10 +32,9 @@ def getdb_credentials():
     return data
 #fixture to connect MYSQL DB
 @pytest.fixture(scope="session")
-def establish_connection():
-    db_credentials = getdb_credentials()
+def establish_connection(test_env):
     #print(db_credentials)
-    conn = mysql.connector.connect(**db_credentials['DB_CREDENTIALS'])
+    conn = mysql.connector.connect(**test_env)
     cursor=conn.cursor()
     print('Connection established successfully')
     yield cursor
