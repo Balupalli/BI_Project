@@ -53,3 +53,12 @@ Stg_Insert_Timestamp DATETIME,
 Insert_Timestamp DATETIME,
 Update_Timestamp DATETIME
 )
+
+--3. Create Customers table from transactions data
+CREATE TABLE Mysql_DB_1.customers(
+Customer_Id VARCHAR(100) primary key,
+Customer_Age INT,
+Customer_Location VARCHAR(100),
+Customer_Address VARCHAR(100),
+Insert_Timestamp DATETIME,
+Update_Timestamp DATETIME);
