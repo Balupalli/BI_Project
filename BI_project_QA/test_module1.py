@@ -19,16 +19,12 @@ def test_connection(establish_connection):
     #print(df.head())
     assert results is not None
 
-@pytest.mark.test_connection
-def test_connection_sql_alchemy(establish_connection):
+@pytest.mark.test_connection_sqlalchemy
+def test_connection_sql_alchemy(establish_connection_sqlalchemy):
     sql="select * from stg_transactions"
-    establish_connection.execute(sql)
-    # Fetch all results
-    results = establish_connection.fetchall()
-    # Convert to DataFrame
-    df = pd.DataFrame(results, columns=[col[0] for col in establish_connection.description])
+    df = pd.read_sql(sql,establish_connection_sqlalchemy)
     #print(df.head())
-    assert results is not None
+    assert df is not None
 
 #2. test case to verify the count of records
 def test_stg_transactions_count(establish_connection):
