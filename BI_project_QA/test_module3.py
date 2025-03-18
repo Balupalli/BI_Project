@@ -54,3 +54,4 @@ def test_stg_transactions_transaction_hour_check(establish_connection_sqlalchemy
             where transaction_hour not between 1 and 24;"""
     df = pd.read_sql(sql, establish_connection_sqlalchemy)
     assert df.iloc[0, 0] == 0
+
