@@ -3,23 +3,28 @@ import pytest
 import sys
 import os
 import pandas as pd
+import logging
+logger = logging.getLogger(__name__)  # Get the module-level logger configuration from conftest.py
 
 # Define a marker in test module so that all tests in the module are run togther
 pytestmark = pytest.mark.stg_transactions_using_sql_alchemy
-
 
 @pytest.mark.test_connection_sqlalchemy
 def test_connection_sql_alchemy(establish_connection_sqlalchemy):
     sql="select * from stg_transactions"
     df = pd.read_sql(sql,establish_connection_sqlalchemy)
-    #print(df.head())
+    logger.info("connected to database and executed the query successfully")
     assert df is not None
 
 #2. test case to verify the count of records
 def test_stg_transactions_count(establish_connection_sqlalchemy):
     sql = "select count(*) from stg_transactions"
     df = pd.read_sql(sql,establish_connection_sqlalchemy)
-    assert df.iloc[0,0]==1472952
+    try:
+        assert df.iloc[0,0]==1472952
+    except AssertionError:
+        logging.error("Assertion failed value does not match")
+        raise
 
 #3. test case to check length of transaction_id , customer_id columns is 36 digit
 def test_stg_transactions_trans_id_check(establish_connection_sqlalchemy):
@@ -32,7 +37,11 @@ def test_stg_transactions_customer_age_check(establish_connection_sqlalchemy):
     sql=""" select count(*) from stg_transactions
             where customer_age < 0 or customer_age > 100"""
     df = pd.read_sql(sql,establish_connection_sqlalchemy)
-    assert df.iloc[0,0]==0
+    try:
+        assert df.iloc[0,0]==0
+    except AssertionError:
+        logging.error("Assertion failed value does not match")
+        raise
 
 #5. test case to check transaction amount cannot be null
 def test_stg_transactions_transact_amount_not_null_check(establish_connection_sqlalchemy):
@@ -53,5 +62,10 @@ def test_stg_transactions_transaction_hour_check(establish_connection_sqlalchemy
     sql=""" select count(*) from stg_transactions
             where transaction_hour not between 1 and 24;"""
     df = pd.read_sql(sql, establish_connection_sqlalchemy)
-    assert df.iloc[0, 0] == 0
+    try:
+        assert df.iloc[0, 0] == 0
+    except AssertionError:
+        logging.error("Assertion failed value does not match")
+        raise
+
 

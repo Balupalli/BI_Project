@@ -4,6 +4,10 @@
 .DS_Store
 # ignore cache files of pytest and cache folder which creates automatically
 __pycache__/
+.pytest_cache/
 *.pyc
 # ignoring the json files to push to git
 *.json
+#ignore the log files
+*.log
+.logs/
