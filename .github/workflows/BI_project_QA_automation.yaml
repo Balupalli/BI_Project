@@ -1,0 +1,31 @@
+ name: BI_project_QA_automation workflow
+
+ # Triggers the workflow on push or pull request events but only for the "main" branch
+ on:
+    push:
+         branches:
+             - main
+
+ # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+ jobs:
+     pytest_qa_automation:
+         runs-on: ubuntu-latest
+
+         steps:
+             - name: Checkout Repository
+               uses: actions/checkout@v4
+
+             - name: Set up Python
+               uses: actions/setup-python@v4
+               with:
+                   python-version: "3.13.1" #As per project requirement
+
+             - name: Install Dependencies # upgrade pip and install all dependencies required for project
+               run: |
+                   python -m pip install --upgrade pip
+                   pip install -r requirements.txt
+
+             - name: Run pytest command
+               run: |
+                   pytest -v -s -m stg_transactions_using_sql_alchemy -n 4
+
