@@ -14,6 +14,10 @@ def configure_logging():
     os.makedirs(log_dir, exist_ok=True)  # Creates 'logs' if it doesn't exist
     log_file = os.path.join(log_dir, "test_execution.log")
 
+    # Ensure logs are overwritten for a fresh test run
+    if os.path.exists(log_file):
+        open(log_file, 'w').close()
+
     # Create a logger
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)  # Set logging level
@@ -23,7 +27,7 @@ def configure_logging():
         logger.removeHandler(handler)
 
     # Create a file handler
-    file_handler = logging.FileHandler(log_file, mode="w")  # 'w' to overwrite logs on each run
+    file_handler = logging.FileHandler(log_file, mode="a")  # 'a' to overwrite logs on each run by all parallel nodes
     file_handler.setFormatter(logging.Formatter(
         "%(asctime)s - %(levelname)s - %(module)s - %(funcName)s - %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S"
