@@ -46,8 +46,8 @@ def test_env(pytestconfig):
     env=pytestconfig.getoption("env")
     db_credentials = getdb_credentials()
     # if env secrets are found trigger is initiated using pipeline else checks for local run
-    logging.basicConfig(level=logging.INFO)
-    logging.info(f"👀 Fetched env vars: DB_USER={DATABASE}")
+    #logging.basicConfig(level=logging.INFO)
+    #logging.info(f"👀 Fetched env vars: DB_USER={DATABASE}")
     if os.getenv("DATABASE") and os.getenv("PASSWORD"):
         return db_credentials['pipeline_credentials']
     else:
@@ -64,9 +64,9 @@ def getdb_credentials():
     project_dir = os.path.dirname(os.path.abspath("config.json"))
     file_path = os.path.join(project_dir,"BI_project_QA","config.json")
     #check for environment variables if code is run in pipeline environment variales are set to fetch from else part.
-    logging.basicConfig(level=logging.INFO)
-    DB_USER=os.getenv("DATABASE")
-    logging.info(f"👀 Fetched env vars: {DB_USER}")
+    #logging.basicConfig(level=logging.INFO)
+    #DB_USER=os.getenv("DATABASE")
+    #logging.info(f"👀 Fetched env vars: {DB_USER}")
     if os.getenv("DATABASE") and os.getenv("PASSWORD"):
         pipeline_credentials_data = {"pipeline_credentials": {
             "database": os.getenv("DATABASE"),
@@ -74,7 +74,7 @@ def getdb_credentials():
             "host": "127.0.0.1",
             "user": "root"}
         }
-        print("credentials fetched from github")
+        #print("credentials fetched from github")
         return pipeline_credentials_data
     else:
         try:

@@ -38,4 +38,8 @@
              - name: Run pytest command
                run: |
                    pytest -v -s -m stg_transactions_using_sql_alchemy -n 4
+             - name: Debug DB credentials are fetching
+               run: |
+                 echo "DATABASE"
+                 
 
