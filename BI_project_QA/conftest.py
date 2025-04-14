@@ -51,18 +51,29 @@ def test_env(pytestconfig):
         return db_credentials['DB_CREDENTIALS_QA']
     elif env=='PROD':
         return db_credentials['DB_CREDENTIALS_PROD']
+    else: return db_credentials['ga']
 
 #function to retrive the credentials
 def getdb_credentials():
     file_name = "config.json"
     project_dir = os.path.dirname(os.path.abspath("config.json"))
     file_path = os.path.join(project_dir,"BI_project_QA","config.json")
-    #print({file_path})
-    #print({project_dir})
-    # with open automatically closes file out of scope
-    with open(file_path,'r') as file:
-        data=json.load(file)
-    return data
+    #check for environment variables if code is run in pipeline environment variales are set to fetch from else part.
+    if not os.getenv("USER") or not os.getenv("PASSWORD"):
+        try:
+            with open(file_path,'r') as file:
+                data=json.load(file)
+            return data
+        except FileNotFoundError:
+            raise RuntimeError("❌ Config file not found and env vars not set. Cannot continue.")
+    else:
+        ga_data =  {"ga":{
+                            "database": os.getenv("USER"),
+                            "password": os.getenv("PASSWORD"),
+                            "host": "localhost",
+                            "user": "root"}
+                    }
+        return ga_data
 
 #fixture to connect MYSQL DB using cursor but it has performance issues with large data
 @pytest.fixture(scope="session")
