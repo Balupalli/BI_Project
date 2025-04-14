@@ -11,6 +11,13 @@
      pytest_qa_automation:
          runs-on: ubuntu-latest
 
+         env:
+           DATABASE: ${{ secrets.DATABASE }}
+           PASSWORD: ${{ secrets.PASSWORD }}
+           HOST: localhost
+           USER: root
+
+
          steps:
              - name: Checkout Repository
                uses: actions/checkout@v4
