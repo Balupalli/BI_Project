@@ -73,7 +73,7 @@ def getdb_credentials():
         pipeline_credentials_data =  {"pipeline_credentials":{
                             "database": os.getenv("DATABASE"),
                             "password": os.getenv("PASSWORD"),
-                            "host": "localhost",
+                            "host": "127.0.0.1",
                             "user": "root"}
                     }
         print("credentials fetched from github")
