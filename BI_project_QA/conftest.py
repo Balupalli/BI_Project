@@ -46,6 +46,8 @@ def test_env(pytestconfig):
     env=pytestconfig.getoption("env")
     db_credentials = getdb_credentials()
     # if env secrets are found trigger is initiated using pipeline else checks for local run
+    logging.basicConfig(level=logging.INFO)
+    logging.info(f"👀 Fetched env vars: DB_USER={DATABASE}")
     if os.getenv("DATABASE") and os.getenv("PASSWORD"):
         return db_credentials['pipeline_credentials']
     else:
