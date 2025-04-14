@@ -45,14 +45,16 @@ def configure_logging():
 def test_env(pytestconfig):
     env=pytestconfig.getoption("env")
     db_credentials = getdb_credentials()
-    print(env)
-    if env=='DEV':
-        return db_credentials['DB_CREDENTIALS_DEV']
-    elif env=='QA':
-        return db_credentials['DB_CREDENTIALS_QA']
-    elif env=='PROD':
-        return db_credentials['DB_CREDENTIALS_PROD']
-    else: return db_credentials['ga']
+    # if env secrets are found trigger is initiated using pipeline else checks for local run
+    if os.getenv("USER") and os.getenv("PASSWORD"):
+        return db_credentials['pipeline_credentials']
+    else:
+        if env=='DEV':
+            return db_credentials['DB_CREDENTIALS_DEV']
+        elif  env=='QA':
+            return db_credentials['DB_CREDENTIALS_QA']
+        elif  env=='PROD':
+            return db_credentials['DB_CREDENTIALS_PROD']
 
 #function to retrive the credentials
 def getdb_credentials():
@@ -68,14 +70,14 @@ def getdb_credentials():
         except FileNotFoundError:
             raise RuntimeError("❌ Config file not found and env vars not set. Cannot continue.")
     else:
-        ga_data =  {"ga":{
+        pipeline_credentials_data =  {"pipeline_credentials":{
                             "database": os.getenv("USER"),
                             "password": os.getenv("PASSWORD"),
                             "host": "localhost",
                             "user": "root"}
                     }
         print("credentials fetched from github")
-        return ga_data
+        return pipeline_credentials_data
 
 #fixture to connect MYSQL DB using cursor but it has performance issues with large data
 @pytest.fixture(scope="session")
