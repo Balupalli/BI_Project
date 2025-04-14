@@ -36,7 +36,7 @@
                    pip install -r requirements.txt
              - name: Debug DB credentials are fetching
                run: |
-                 echo "DATABASE"
+                 echo "$DATABASE"
 
              - name: Run pytest command
                run: |
