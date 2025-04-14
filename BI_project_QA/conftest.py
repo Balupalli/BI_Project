@@ -62,22 +62,22 @@ def getdb_credentials():
     project_dir = os.path.dirname(os.path.abspath("config.json"))
     file_path = os.path.join(project_dir,"BI_project_QA","config.json")
     #check for environment variables if code is run in pipeline environment variales are set to fetch from else part.
-    if not os.getenv("USER") or not os.getenv("PASSWORD"):
+    if os.getenv("USER") and os.getenv("PASSWORD"):
+        pipeline_credentials_data = {"pipeline_credentials": {
+            "database": os.getenv("DATABASE"),
+            "password": os.getenv("PASSWORD"),
+            "host": "127.0.0.1",
+            "user": "root"}
+        }
+        print("credentials fetched from github")
+        return pipeline_credentials_data
+    else:
         try:
             with open(file_path,'r') as file:
                 data=json.load(file)
             return data
         except FileNotFoundError:
             raise RuntimeError("❌ Config file not found and env vars not set. Cannot continue.")
-    else:
-        pipeline_credentials_data =  {"pipeline_credentials":{
-                            "database": os.getenv("DATABASE"),
-                            "password": os.getenv("PASSWORD"),
-                            "host": "127.0.0.1",
-                            "user": "root"}
-                    }
-        print("credentials fetched from github")
-        return pipeline_credentials_data
 
 #fixture to connect MYSQL DB using cursor but it has performance issues with large data
 @pytest.fixture(scope="session")
