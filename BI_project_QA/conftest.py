@@ -73,6 +73,7 @@ def getdb_credentials():
                             "host": "localhost",
                             "user": "root"}
                     }
+        print("credentials fetched from github")
         return ga_data
 
 #fixture to connect MYSQL DB using cursor but it has performance issues with large data
