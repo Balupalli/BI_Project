@@ -71,7 +71,7 @@ def getdb_credentials():
             raise RuntimeError("❌ Config file not found and env vars not set. Cannot continue.")
     else:
         pipeline_credentials_data =  {"pipeline_credentials":{
-                            "database": os.getenv("USER"),
+                            "database": os.getenv("DATABASE"),
                             "password": os.getenv("PASSWORD"),
                             "host": "localhost",
                             "user": "root"}
