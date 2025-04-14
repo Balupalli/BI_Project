@@ -45,6 +45,7 @@ def configure_logging():
 def test_env(pytestconfig):
     env=pytestconfig.getoption("env")
     db_credentials = getdb_credentials()
+    print(env)
     if env=='DEV':
         return db_credentials['DB_CREDENTIALS_DEV']
     elif env=='QA':
