@@ -65,7 +65,8 @@ def getdb_credentials():
     file_path = os.path.join(project_dir,"BI_project_QA","config.json")
     #check for environment variables if code is run in pipeline environment variales are set to fetch from else part.
     logging.basicConfig(level=logging.INFO)
-    logging.info(f"👀 Fetched env vars: DB_USER={DATABASE}")
+    DB_USER=os.getenv("DATABASE")
+    logging.info(f"👀 Fetched env vars: {DB_USER}")
     if os.getenv("DATABASE") and os.getenv("PASSWORD"):
         pipeline_credentials_data = {"pipeline_credentials": {
             "database": os.getenv("DATABASE"),
