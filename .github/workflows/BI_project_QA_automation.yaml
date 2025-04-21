@@ -37,6 +37,7 @@
              - name: Debug DB credentials are fetching
                run: |
                  echo "DATABASE = $DATABASE"
+                 echo "DATABASE = ${{ secrets.DATABASE }}"
 
              - name: Run pytest command
                run: |
