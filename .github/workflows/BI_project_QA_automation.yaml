@@ -10,7 +10,7 @@
  jobs:
      pytest_qa_automation:
          runs-on: ubuntu-latest
-         #services: #mysql service is not required 
+         #services: #mysql service is not required
            #mysql:
              #image: mysql:8.0
              #ports:
@@ -34,7 +34,7 @@
                  echo "DATABASE= ${{secrets.DATABASE}}" >> $GITHUB_ENV
                  echo "PASSWORD= ${{secrets.PASSWORD}}" >> $GITHUB_ENV
                  echo "USER=root" >> $GITHUB_ENV
-                 echo "HOST=127.0.0.1" >> $GITHUB_ENV 
+                 echo "HOST=mysql" >> $GITHUB_ENV 
 
              - name: Debug DB credentials are fetching
                run: |

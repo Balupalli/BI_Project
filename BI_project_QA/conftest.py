@@ -68,10 +68,11 @@ def getdb_credentials():
     #DB_USER=os.getenv("DATABASE")
     #logging.info(f"👀 Fetched env vars: {DB_USER}")
     if os.getenv("DATABASE") and os.getenv("PASSWORD"):
-        pipeline_credentials_data = {"pipeline_credentials": {
+        pipeline_credentials_data = {"pipeline_credentials":
+            {
             "database": os.getenv("DATABASE"),
             "password": os.getenv("PASSWORD"),
-            "host": "127.0.0.1",
+            "host": "mysql",
             "user": "root"}
         }
         #print("credentials fetched from github")
