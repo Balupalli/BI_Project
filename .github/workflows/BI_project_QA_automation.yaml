@@ -52,7 +52,7 @@
                        sleep 5  # Wait for 5 seconds before trying again
                  done
              - name: List running Docker containers #temporary
-               run: docker ps # list all the docker containers
+               run: docker ps -a # list all the docker containers
 
              - name: Show MySQL logs #temporary
                run: docker logs <mysql_container_name>  # If using Docker service display logs
