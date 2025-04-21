@@ -36,14 +36,14 @@
                  echo "USER=root" >> $GITHUB_ENV
                  echo "HOST=mysql" >> $GITHUB_ENV 
 
-             - name: Debug DB credentials are fetching
+             - name: Debug DB credentials are fetching #temporary
                run: |
                  echo "DATABASE = $DATABASE"
                  echo "DATABASE = ${{ secrets.DATABASE }}"
 
              - name: Wait for MySQL to be ready
                run: |
-                 for i in {1..60}; do
+                 for i in {1..10}; do
                     if mysqladmin ping -h "mysql" --silent; then
                        echo "MySQL is up!"
                        break
@@ -51,6 +51,8 @@
                        echo "Waiting for MySQL..."
                        sleep 5  # Wait for 5 seconds before trying again
                  done
+             - name: Show MySQL logs #temporary
+               run: docker logs <mysql_container_name>  # If using Docker service
 
              - name: Run pytest command
                run: |
