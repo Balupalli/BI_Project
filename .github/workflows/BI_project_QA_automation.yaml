@@ -43,13 +43,13 @@
 
              - name: Wait for MySQL to be ready
                run: |
-                 for i in {1..30}; do
+                 for i in {1..60}; do
                     if mysqladmin ping -h "127.0.0.1" --silent; then
                        echo "MySQL is up!"
                        break
                     fi
                        echo "Waiting for MySQL..."
-                       sleep 2  # Wait for 2 seconds before trying again
+                       sleep 5  # Wait for 5 seconds before trying again
                  done
 
              - name: Run pytest command
