@@ -29,10 +29,10 @@
                    python -m pip install --upgrade pip
                    pip install -r requirements.txt
 
-             - name: Export environment variables
+             - name: Export environment variables #exporting at job level does not make var available to all steps so writing to github_env file makes vars available of rest of all steps.
                run: |
-                 echo "DATABASE=${{ secrets.DATABASE }}" >> $GITHUB_ENV
-                 echo "PASSWORD=${{ secrets.PASSWORD }}" >> $GITHUB_ENV
+                 echo "DATABASE= ${{ secrets.DATABASE }}" >> $GITHUB_ENV
+                 echo "PASSWORD= ${{ secrets.PASSWORD }}" >> $GITHUB_ENV
                  echo "USER=root" >> $GITHUB_ENV
                  echo "HOST=127.0.0.1" >> $GITHUB_ENV 
 
