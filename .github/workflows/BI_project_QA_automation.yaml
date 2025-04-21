@@ -10,11 +10,11 @@
  jobs:
      pytest_qa_automation:
          runs-on: ubuntu-latest
-         services:
-           mysql:
-             image: mysql:8.0
-             ports:
-               - 3306:3306
+         #services: #mysql service is not required 
+           #mysql:
+             #image: mysql:8.0
+             #ports:
+              # - 3306:3306
          steps:
              - name: Checkout Repository
                uses: actions/checkout@v4
@@ -40,7 +40,7 @@
                run: |
                  echo "DATABASE = $DATABASE"
                  echo "DATABASE = ${{ secrets.DATABASE }}"
-                 
+
              - name: Wait for MySQL to be ready
                run: |
                  for i in {1..30}; do
