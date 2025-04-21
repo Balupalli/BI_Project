@@ -10,11 +10,11 @@
  jobs:
      pytest_qa_automation:
          runs-on: ubuntu-latest
-         #services: #mysql service is not required
-           #mysql:
-             #image: mysql:8.0
-             #ports:
-              # - 3306:3306
+         services: #mysql service is not required
+           mysql:
+             image: mysql:8.0
+             ports:
+               - 3306:3306
          steps:
              - name: Checkout Repository
                uses: actions/checkout@v4
