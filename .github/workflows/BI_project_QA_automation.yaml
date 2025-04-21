@@ -43,7 +43,7 @@
 
              - name: Wait for MySQL to be ready
                run: |
-                 for i in {1..60}; do
+                 for i in {1..10}; do
                     if mysqladmin ping -h "mysql" --silent; then
                        echo "MySQL is up!"
                        break
