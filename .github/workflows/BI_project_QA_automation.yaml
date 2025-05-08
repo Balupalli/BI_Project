@@ -10,7 +10,7 @@
  jobs:
      pytest_qa_automation:
          runs-on:  [self-hosted] # to run on self hosted runner not public ubuntu-latest
-         services: #mysql service is not required
+         #services: #mysql service is not required
            #mysql:
              #image: mysql:8.0
              #ports:
