@@ -59,7 +59,7 @@
 
              - name: Run pytest command
                run: |
-                   pytest -v -s -m stg_transactions_using_sql_alchemy -n 1
+                   pytest -v -s -m stg_transactions_using_sql_alchemy
 
                  
 
