@@ -9,12 +9,12 @@
  # A workflow run is made up of one or more jobs that can run sequentially or in parallel
  jobs:
      pytest_qa_automation:
-         runs-on: ubuntu-latest
+         runs-on:  [self-hosted] # to run on self hosted runner not public ubuntu-latest
          services: #mysql service is not required
-           mysql:
-             image: mysql:8.0
-             ports:
-               - 3306:3306
+           #mysql:
+             #image: mysql:8.0
+             #ports:
+              # - 3306:3306
          steps:
              - name: Checkout Repository
                uses: actions/checkout@v4
@@ -41,21 +41,21 @@
                  echo "DATABASE = $DATABASE"
                  echo "DATABASE = ${{ secrets.DATABASE }}"
 
-             - name: Wait for MySQL to be ready
-               run: |
-                 for i in {1..5}; do
-                    if mysqladmin ping -h "mysql" --silent; then
-                       echo "MySQL is up!"
-                       break
-                    fi
-                       echo "Waiting for MySQL..."
-                       sleep 5  # Wait for 5 seconds before trying again
-                 done
-             - name: List running Docker containers #temporary
-               run: docker ps -a # list all the docker containers
+             #- name: Wait for MySQL to be ready
+               #run: |
+                 #for i in {1..5}; do
+                    #if mysqladmin ping -h "mysql" --silent; then
+                       #echo "MySQL is up!"
+                       #break
+                    #fi
+                       #echo "Waiting for MySQL..."
+                      # sleep 5  # Wait for 5 seconds before trying again
+                 #done
+             #- name: List running Docker containers #temporary
+               #run: docker ps -a # list all the docker containers
 
-             - name: Show MySQL logs #temporary
-               run: docker logs <mysql_container_name>  # If using Docker service display logs
+             #- name: Show MySQL logs #temporary
+               #run: docker logs <mysql_container_name>  # If using Docker service display logs
 
              - name: Run pytest command
                run: |
