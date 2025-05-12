@@ -19,6 +19,10 @@
              #ports:
               # - 3306:3306
          steps:
+             - name: Show runner env
+               run: |
+                echo "Tool cache: $RUNNER_TOOL_CACHE"
+                echo "Temp dir: $RUNNER_TEMP"
              - name: Checkout Repository
                uses: actions/checkout@v4
 
