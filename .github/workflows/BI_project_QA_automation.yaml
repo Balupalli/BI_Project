@@ -59,7 +59,7 @@
 
              #- name: Show MySQL logs #temporary
                #run: docker logs <mysql_container_name>  # If using Docker service display logs
-             #enable actions pipeline with write access
+             #enable actions pipeline with write acces
 
              - name: Run pytest command
                run: |
