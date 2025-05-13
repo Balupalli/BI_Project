@@ -11,7 +11,7 @@
      pytest_qa_automation:
          runs-on:  [self-hosted] # to run on self hosted runner not public ubuntu-latest
          env:
-           RUNNER_TOOL_CACHE: /tmp/github-runner-tool-cache
+           AGENT_TOOLSDIRECTORY: /tmp/github-runner-tool-cache
            RUNNER_TEMP: /tmp/github-runner-temp
          #services: #mysql service is not required
            #mysql:
@@ -21,7 +21,7 @@
          steps:
              - name: Show runner env
                run: |
-                echo "Tool cache: $RUNNER_TOOL_CACHE"
+                echo "Tool cache: $AGENT_TOOLSDIRECTORY"
                 echo "Temp dir: $RUNNER_TEMP"
              - name: Checkout Repository
                uses: actions/checkout@v4
