@@ -29,7 +29,7 @@
              - name: Set up Python
                uses: actions/setup-python@v4
                with:
-                   python-version: "3.13.1" #As per project requirement
+                   python-version: "3.12" #As per project requirement
 
              - name: Install Dependencies # upgrade pip and install all dependencies required for project
                run: |
@@ -63,7 +63,7 @@
 
              #- name: Show MySQL logs #temporary
                #run: docker logs <mysql_container_name>  # If using Docker service display logs
-             #enable actions pipeline with write acces
+             #enable actions pipeline with write accesss
 
              - name: Run pytest command
                run: |
