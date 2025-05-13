@@ -10,9 +10,9 @@
  jobs:
      pytest_qa_automation:
          runs-on:  [self-hosted] # to run on self hosted runner not public ubuntu-latest
-         env:
-           AGENT_TOOLSDIRECTORY: /tmp/github-runner-tool-cache
-           RUNNER_TEMP: /tmp/github-runner-temp
+         #env:
+           #AGENT_TOOLSDIRECTORY: /tmp/github-runner-tool-cache
+           #RUNNER_TEMP: /tmp/github-runner-temp
          #services: #mysql service is not required
            #mysql:
              #image: mysql:8.0
@@ -26,11 +26,17 @@
              - name: Checkout Repository
                uses: actions/checkout@v4
 
-             - name: Set up Python
+             - name: Set custom tool cache directory
+               run: |
+                 # Set a custom tool cache directory that the runner has permissions to write to
+                 echo "RUNNER_TOOL_CACHE=/tmp/github-runner-tool-cache" >> $GITHUB_ENV
+
+             - name: Set up Python (Install Python 3.12)
                uses: actions/setup-python@v4
                with:
-                   python-version: "3.12" #As per project requirement
-                   cache: "false"
+                 python-version: "3.12"
+                 cache: "false"  # No need to cache (for now)
+                 update-environment: true
 
              - name: Install Dependencies # upgrade pip and install all dependencies required for project
                run: |
