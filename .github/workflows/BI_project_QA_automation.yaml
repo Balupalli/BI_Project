@@ -30,6 +30,7 @@
                uses: actions/setup-python@v4
                with:
                    python-version: "3.12" #As per project requirement
+                   cache: "false"
 
              - name: Install Dependencies # upgrade pip and install all dependencies required for project
                run: |
