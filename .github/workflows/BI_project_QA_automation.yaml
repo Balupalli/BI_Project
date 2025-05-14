@@ -27,7 +27,7 @@ jobs:
 
       - name: Install pyenv and Python
         run: |
-          brew install pyenv
+          arch -arm64 brew install pyenv
 
           export PYENV_ROOT="$HOME/.pyenv"
           export PATH="$PYENV_ROOT/bin:$PATH"
