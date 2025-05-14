@@ -31,13 +31,16 @@
 
              - name: Install pyenv and Python
                run: |
+              # Install pyenv via Homebrew
                  brew install pyenv
+
               # Set up pyenv environment
                  export PYENV_ROOT="$HOME/.pyenv"
                  export PATH="$PYENV_ROOT/bin:$PATH"
                  eval "$(pyenv init --path)"
                  eval "$(pyenv init -)"
-                 # Install Python (if not already installed)
+
+              # Install Python (if not already installed)
                  pyenv install 3.12.2 -s
                  pyenv global 3.12.2
 
