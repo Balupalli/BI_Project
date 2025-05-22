@@ -78,6 +78,6 @@ jobs:
         run: |
           pytest -v -s -m stg_transactions_using_sql_alchemy
 
-      #unschedule dnt model
+      #schedule dnt model
 
       #enhancelogic
